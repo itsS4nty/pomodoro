@@ -11,12 +11,14 @@
         "prettier": "prettier . --check",
         "prettier:fix": "prettier . --write",
         "fix:all": "npm run prettier:fix && npm run lint:fix && node scripts/format.js",
-        "preview": "vite preview"
+        "preview": "vite preview", 
+        "create-service": "node scripts/generate-service.js"
     },
     "dependencies": {
         "menubar": "^9.4.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
+        "react-router-dom": "^6.22.0",
         "styled-components": "^6.1.8",
         "zod": "^3.22.4"
     },

@@ -17,6 +17,12 @@ export const THEME = {
         primary: '#CCEDFF', // Lighter pastel blue, closer to the background but slightly more saturated
         secondary: '#2C5075', // Dark blue, but less dark than the font color
     },
+    SettingsPage: {
+        background: '#E0E0E0', // Light grey for a neutral, unobtrusive backdrop
+        fontColor: '#4A4A4A', // Medium grey for strong contrast and readability, slightly darker tone
+        primary: '#C6C6C6', // Medium-light grey, a hint lighter than background for primary elements
+        secondary: '#D0D0D0', // Slightly lighter than primary, for subtle differentiation
+    },
 };
 
 export type ThemeType = typeof THEME;

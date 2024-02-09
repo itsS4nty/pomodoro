@@ -21,8 +21,8 @@ async function createWindow() {
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
         },
-        width: 400,
-        height: 800,
+        width: 300,
+        height: 600,
     });
     // Test active push message to Renderer-process.
     win.webContents.on('did-finish-load', () => {
