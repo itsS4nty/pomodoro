@@ -5,6 +5,7 @@ import { ThemePhases } from './config/theme/theme-styles';
 import Icon from './components/Icon';
 import { hexToRGBA } from './lib/styles-helper';
 import { useEffect, useState } from 'react';
+import { Config } from './types/config';
 
 let phase: ThemePhases = 'WorkPhase';
 
@@ -67,7 +68,7 @@ const Options = styled.div`
     align-items: center;
     width: 100%;
     gap: 16px;
-    
+
     div {
         cursor: pointer;
         background-color: ${props => hexToRGBA(props.theme[phase].secondary, 0.3)};
@@ -111,37 +112,27 @@ const SettingsContainer = styled.div`
 `;
 
 function App() {
-    const [seconds, setSeconds] = useState(2);
+    const [seconds, setSeconds] = useState(1500);
     const [isActive, setIsActive] = useState(false);
     const [urlPlayPauseImg, setUrlPlayPauseImg] = useState('/icons/play.png');
     const [counter, setCounter] = useState(0);
+    const [config, setConfig] = useState<Config>({} as Config);
 
-    const toggleTimer = () => {
-        setUrlPlayPauseImg(isActive ? '/icons/play.png' : '/icons/pause.png');
-        setIsActive(!isActive);
-    };
-
-    const reset = () => {
-        const audio = new Audio('/audio/done.mp3');
-        audio.play();
-        if (phase === 'WorkPhase') {
-            const shortBreak = counter < 4;
-            phase = shortBreak ? 'BreakPhase' : 'LongBreakPhase';
-            setSeconds(shortBreak ? 2 : 3);
-            setCounter(shortBreak ? _counter => _counter + 1 : 0);
-        } else {
-            setSeconds(2);
-            phase = 'WorkPhase';
-        }
-        setIsActive(false);
-        setUrlPlayPauseImg('/icons/play.png');
-    };
+    useEffect(() => {
+        window.ipcRenderer.send('get-config');
+        window.ipcRenderer.on('get-config-response', (_, data: Config) => {
+            setConfig(data);
+            if (phase === 'WorkPhase') setSeconds(data.workPhaseSeconds);
+            else if (phase === 'BreakPhase') setSeconds(data.longBreakPhaseSeconds);
+            else setSeconds(data.longBreakPhaseSeconds);
+        });
+    }, []);
 
     useEffect(() => {
         let interval: NodeJS.Timeout | undefined;
         if (isActive && seconds > 0) {
             interval = setInterval(() => {
-                setSeconds(seconds => seconds - 1);
+                setSeconds(seconds => seconds - 60);
             }, 1000);
         } else if (seconds === 0) {
             reset();
@@ -153,6 +144,27 @@ function App() {
 
     const minutes = Math.floor(seconds / 60);
     const displaySeconds = seconds % 60;
+
+    const toggleTimer = () => {
+        setUrlPlayPauseImg(isActive ? '/icons/play.png' : '/icons/pause.png');
+        setIsActive(!isActive);
+    };
+
+    const reset = () => {
+        const audio = new Audio('/audio/done.mp3');
+        audio.play();
+        if (phase === 'WorkPhase') {
+            const shortBreak = counter < config.counterToLongPhase;
+            phase = shortBreak ? 'BreakPhase' : 'LongBreakPhase';
+            setSeconds(shortBreak ? config.breakPhaseSeconds : config.longBreakPhaseSeconds);
+            setCounter(shortBreak ? _counter => _counter + 1 : 0);
+        } else {
+            setSeconds(config.workPhaseSeconds);
+            phase = 'WorkPhase';
+        }
+        setIsActive(false);
+        setUrlPlayPauseImg('/icons/play.png');
+    };
 
     const getInfo = () => {
         if (phase === 'WorkPhase')

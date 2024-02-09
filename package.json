@@ -17,11 +17,11 @@
         "menubar": "^9.4.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
-        "sqlite3": "^5.1.7",
         "styled-components": "^6.1.8",
         "zod": "^3.22.4"
     },
     "devDependencies": {
+        "@electron/rebuild": "^3.6.0",
         "@types/node": "^20.11.16",
         "@types/react": "^18.2.21",
         "@types/react-dom": "^18.2.7",
@@ -36,7 +36,7 @@
         "eslint-plugin-react-refresh": "^0.4.3",
         "glob": "^10.3.10",
         "prettier": "^3.2.5",
-        "typescript": "^5.2.2",
+        "typescript": "^5.3.3",
         "vite": "^4.4.9",
         "vite-plugin-electron": "^0.14.0",
         "vite-plugin-electron-renderer": "^0.14.5"
