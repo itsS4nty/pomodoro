@@ -3,5 +3,5 @@ export type Config = {
     breakPhaseSeconds: number;
     longBreakPhaseSeconds: number;
     counterToLongPhase: number;
-    targetPerDay: number;
+    launchAtStartup: boolean;
 };

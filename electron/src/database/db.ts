@@ -10,7 +10,7 @@ export class Database {
         breakPhaseSeconds: 5 * 60,
         longBreakPhaseSeconds: 10 * 60,
         counterToLongPhase: 4,
-        targetPerDay: 10,
+        launchAtStartup: false,
     };
 
     constructor() {
@@ -24,6 +24,21 @@ export class Database {
                 throw new Error('No config file found');
 
             return JSON.parse(_data) as Config;
+        } catch (err: unknown) {
+            let msg = 'Unknown error';
+            if(err instanceof Error) msg = err.message;
+            throw new Error(`Error: ${msg}`);
+        }
+    }
+
+    updateConfig(config: Config): boolean {
+        try {
+            if(!fs.existsSync(this.configPath)) {
+                const _configDirectory = path.dirname(this.configPath);
+                fs.mkdirSync(_configDirectory, { recursive: true });
+            }
+            fs.writeFileSync(this.configPath, JSON.stringify(config));
+            return true;
         } catch (err: unknown) {
             let msg = 'Unknown error';
             if(err instanceof Error) msg = err.message;

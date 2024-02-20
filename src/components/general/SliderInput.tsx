@@ -34,6 +34,7 @@ const SliderValue = styled.span`
 
 const RangeInput = styled.input`
     -webkit-appearance: none; // Override default appearance
+    appearance: none;
     flex-grow: 1; // Allow the slider to grow to fill available space
     height: 8px; // Height of the slider
     border-radius: 5px;

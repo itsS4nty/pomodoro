@@ -8,6 +8,7 @@ type OptionsProps = {
     phase: ThemePhases;
     onToggleTimer: () => void;
     urlPlayPauseImg: string;
+    onSkipTimer: (playAudio: boolean) => void;
 };
 
 const OptionsStyled = styled.div<{ phase: ThemePhases }>`
@@ -51,7 +52,7 @@ const Options = (props: OptionsProps) => {
             <div onClick={props.onToggleTimer}>
                 <Icon url={props.urlPlayPauseImg} />
             </div>
-            <div>
+            <div onClick={() => props.onSkipTimer(false)}>
                 <Icon url='/icons/skip.png' />
             </div>
         </OptionsStyled>

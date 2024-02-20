@@ -106,9 +106,11 @@ const TimerPage = () => {
         setIsActive(!isActive);
     };
 
-    const reset = () => {
-        const audio = new Audio('/audio/done.mp3');
-        audio.play();
+    const reset = (playAudio: boolean = true) => {
+        if(playAudio) {
+            const audio = new Audio('/audio/done.mp3');
+            audio.play();
+        }
         if (phase === 'WorkPhase') {
             const shortBreak = counter < config.counterToLongPhase;
             phase = shortBreak ? 'BreakPhase' : 'LongBreakPhase';
@@ -129,7 +131,7 @@ const TimerPage = () => {
             </SettingsContainer>
             <Tag phase={phase} />
             <Timer phase={phase} minutes={minutes} seconds={displaySeconds} />
-            <Options phase={phase} onToggleTimer={toggleTimer} urlPlayPauseImg={urlPlayPauseImg} />
+            <Options phase={phase} onToggleTimer={toggleTimer} urlPlayPauseImg={urlPlayPauseImg} onSkipTimer={reset} />
         </Container>
     );
 };
