@@ -24,17 +24,15 @@ const mb = menubar({
         height: 600,
         width: 300,
     },
-
 });
 
 mb.on('ready', () => {
-    console.log('Menubar app is ready.');
     // Additional menubar app logic here
 });
 
 // You might keep or adjust the existing app lifecycle events as needed
 app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') {
+    if(process.platform !== 'darwin') {
         app.quit();
     }
 });

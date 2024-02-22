@@ -23,7 +23,7 @@ const Container = styled.div`
     h1 {
         margin-top: 5%;
     }
-    
+
     div {
         .settings {
             margin-top: 15px;
@@ -31,7 +31,6 @@ const Container = styled.div`
             flex-direction: column;
             gap: 25px;
             width: 225px;
-            
         }
     }
 `;
@@ -75,7 +74,7 @@ const SettingsPage = () => {
     useEffect(() => {
         const listener = new (class implements IIpc {
             onEventReceived(event: EventsOn, data: Config): void {
-                if (event !== 'get-config-response') return;
+                if(event !== 'get-config-response') return;
                 setWorkPhase(data.workPhaseSeconds / 60);
                 setBreakPhase(data.breakPhaseSeconds / 60);
                 setLongBreakPhase(data.longBreakPhaseSeconds / 60);
@@ -91,7 +90,7 @@ const SettingsPage = () => {
     useEffect(() => {
         const listener = new (class implements IIpc {
             onEventReceived(event: EventsOn, data: boolean): void {
-                if (event !== 'update-config-response') return;
+                if(event !== 'update-config-response') return;
                 if(data) alert('Config saved');
                 else alert('Error while saving config');
             }
@@ -159,7 +158,11 @@ const SettingsPage = () => {
             <div>
                 <h3>General</h3>
                 <div className='settings general'>
-                    <CheckboxInput label='Launch at startup' isChecked={launchAtStartup} setIsChecked={setLaunchAtStartup} />
+                    <CheckboxInput
+                        label='Launch at startup'
+                        isChecked={launchAtStartup}
+                        setIsChecked={setLaunchAtStartup}
+                    />
                     <CheckboxInput label='Sync' isChecked={sync} setIsChecked={setSync} />
                 </div>
             </div>

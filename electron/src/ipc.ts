@@ -7,8 +7,8 @@ export class Ipc {
     private db: Database;
 
     constructor(ipcMain: Electron.IpcMain, db: Database) {
-        if (!ipcMain) throw new Error('No ipcMain');
-        if (!db) throw new Error('No database');
+        if(!ipcMain) throw new Error('No ipcMain');
+        if(!db) throw new Error('No database');
 
         this.ipcMain = ipcMain;
         this.db = db;

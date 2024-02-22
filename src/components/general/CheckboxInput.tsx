@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import styled from 'styled-components';
 
 type CheckboxInputProps = {
@@ -52,7 +51,6 @@ const CheckboxLabel = styled.span`
 `;
 
 function CheckboxInput(props: CheckboxInputProps) {
-
     const toggleCheckbox = () => {
         props.setIsChecked(!props.isChecked);
     };

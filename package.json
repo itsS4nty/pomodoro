@@ -11,7 +11,7 @@
         "prettier": "prettier . --check",
         "prettier:fix": "prettier . --write",
         "fix:all": "npm run prettier:fix && npm run lint:fix && node scripts/format.js",
-        "preview": "vite preview", 
+        "preview": "vite preview",
         "create-service": "node scripts/generate-service.js"
     },
     "dependencies": {

@@ -31,9 +31,7 @@ const NotFound = () => {
     return (
         <Container>
             <Title>Ooops!</Title>
-            <Description>
-                Sorry, page not found.
-            </Description>
+            <Description>Sorry, page not found.</Description>
             <Error>Error 404</Error>
         </Container>
     );

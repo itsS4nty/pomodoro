@@ -29,7 +29,7 @@ export class Ipc {
 
     unsubscribeToEvents = (callback: IIpc): void => {
         const index = this.subscribers.indexOf(callback);
-        if (index !== -1) this.subscribers.splice(index, 1);
+        if(index !== -1) this.subscribers.splice(index, 1);
     };
 
     protected publishOnEventReceived = (event: EventsOn, data: unknown) => {

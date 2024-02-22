@@ -15,7 +15,11 @@ const Router = () => {
         },
         {
             path: '/pomodoros',
-            element: <span>Pomodoros<Link to='/'>Back</Link></span>,
+            element: (
+                <span>
+                    Pomodoros<Link to='/'>Back</Link>
+                </span>
+            ),
         },
         {
             path: '*',

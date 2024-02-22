@@ -16,7 +16,6 @@ const SliderContainer = styled.div`
     gap: 5px;
 `;
 
-
 const SliderLabel = styled.span`
     color: ${props => props.theme.SettingsPage.fontColor}; // Dark grey font color
     font-weight: 500;
@@ -81,7 +80,9 @@ const SliderInput = (props: SliderInputProps) => {
                     step={props.step}
                     onChange={e => props.setSliderValue(parseInt(e.target.value, 10))}
                 />{' '}
-                <SliderValue>{String(props.sliderValue).padStart(2, '0')} {props.valueText}</SliderValue>
+                <SliderValue>
+                    {String(props.sliderValue).padStart(2, '0')} {props.valueText}
+                </SliderValue>
             </RangeContainer>
         </SliderContainer>
     );

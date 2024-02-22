@@ -18,7 +18,8 @@ const OptionsStyled = styled.div<{ phase: ThemePhases }>`
     width: 100%;
     gap: 16px;
 
-    div, a {
+    div,
+    a {
         all: unset;
         cursor: pointer;
         background-color: ${props => hexToRGBA(props.theme[props.phase].secondary, 0.3)};

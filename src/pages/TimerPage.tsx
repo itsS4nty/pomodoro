@@ -71,10 +71,10 @@ const TimerPage = () => {
     useEffect(() => {
         const listener = new (class implements IIpc {
             onEventReceived(event: EventsOn, data: Config): void {
-                if (event !== 'get-config-response') return;
+                if(event !== 'get-config-response') return;
                 setConfig(data);
-                if (phase === 'WorkPhase') setSeconds(data.workPhaseSeconds);
-                else if (phase === 'BreakPhase') setSeconds(data.longBreakPhaseSeconds);
+                if(phase === 'WorkPhase') setSeconds(data.workPhaseSeconds);
+                else if(phase === 'BreakPhase') setSeconds(data.longBreakPhaseSeconds);
                 else setSeconds(data.longBreakPhaseSeconds);
             }
         })();
@@ -86,11 +86,11 @@ const TimerPage = () => {
 
     useEffect(() => {
         let interval: NodeJS.Timeout | undefined;
-        if (isActive && seconds > 0) {
+        if(isActive && seconds > 0) {
             interval = setInterval(() => {
                 setSeconds(seconds => seconds - 60);
             }, 1000);
-        } else if (seconds === 0) {
+        } else if(seconds === 0) {
             reset();
         }
 
@@ -111,7 +111,7 @@ const TimerPage = () => {
             const audio = new Audio('/audio/done.mp3');
             audio.play();
         }
-        if (phase === 'WorkPhase') {
+        if(phase === 'WorkPhase') {
             const shortBreak = counter < config.counterToLongPhase;
             phase = shortBreak ? 'BreakPhase' : 'LongBreakPhase';
             setSeconds(shortBreak ? config.breakPhaseSeconds : config.longBreakPhaseSeconds);
@@ -131,7 +131,12 @@ const TimerPage = () => {
             </SettingsContainer>
             <Tag phase={phase} />
             <Timer phase={phase} minutes={minutes} seconds={displaySeconds} />
-            <Options phase={phase} onToggleTimer={toggleTimer} urlPlayPauseImg={urlPlayPauseImg} onSkipTimer={reset} />
+            <Options
+                phase={phase}
+                onToggleTimer={toggleTimer}
+                urlPlayPauseImg={urlPlayPauseImg}
+                onSkipTimer={reset}
+            />
         </Container>
     );
 };

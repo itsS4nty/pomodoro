@@ -33,7 +33,7 @@ const TagStyled = styled.div<TagProps>`
 
 const Tag = (props: TagProps) => {
     const getInfo = () => {
-        if (props.phase === 'WorkPhase')
+        if(props.phase === 'WorkPhase')
             return (
                 <>
                     <Icon url='/icons/brain.png' />
