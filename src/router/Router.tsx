@@ -1,4 +1,4 @@
-import { createBrowserRouter, Link, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import TimerPage from '../pages/TimerPage';
 import NotFound from '../pages/NotFound';
 import SettingsPage from '../pages/SettingsPage';
