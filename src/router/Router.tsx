@@ -2,6 +2,7 @@ import { createBrowserRouter, Link, RouterProvider } from 'react-router-dom';
 import TimerPage from '../pages/TimerPage';
 import NotFound from '../pages/NotFound';
 import SettingsPage from '../pages/SettingsPage';
+import PomodorosPage from '../pages/PomodorosPage';
 
 const Router = () => {
     const router = createBrowserRouter([
@@ -15,11 +16,7 @@ const Router = () => {
         },
         {
             path: '/pomodoros',
-            element: (
-                <span>
-                    Pomodoros<Link to='/'>Back</Link>
-                </span>
-            ),
+            element: <PomodorosPage />,
         },
         {
             path: '*',

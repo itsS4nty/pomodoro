@@ -1,4 +1,4 @@
-export type Work = {
+export type Pomodoro = {
     id: number;
     name: string;
     sub: {
