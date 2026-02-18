@@ -6,14 +6,7 @@
     "Zero external database dependencies. Fully offline, JSON file-based storage",
     "Cross-platform builds targeting macOS (DMG), Windows (NSIS), and Linux (AppImage)"
   ],
-  "additionalTechStack": [
-    "Styled Components (dynamic, phase-aware theming)",
-    "React Router DOM (SPA client-side routing)",
-    "Zod (runtime schema validation on the Electron main process)",
-    "Menubar (system tray integration via the menubar npm package)",
-    "Vite Plugin Electron (unified dev/build pipeline for main + renderer)",
-    "Electron Builder (cross-platform packaging & distribution)"
-  ],
+  "additionalTechStack": [],
   "challenges": [
     "Bridging the Electron main/renderer process gap with a custom IPC pub/sub layer: built an event-driven service (Ipc class) with typed channels, subscriber registration, and a preload script that safely exposes ipcRenderer via contextBridge, keeping the renderer sandboxed while still reactive to backend state changes.",
     "Implementing phase-aware dynamic theming without prop-drilling: each timer phase (Work, Short Break, Long Break, Settings) carries its own color palette, and Styled Components' ThemeProvider swaps styles at the component level based on the current phase without requiring a full re-mount.",
