@@ -1,0 +1,39 @@
+{
+  "overview": "A cross-platform desktop Pomodoro timer built with Electron and React. It helps you stay focused by cycling through work sessions, short breaks, and long breaks, all from a lightweight, theme-aware UI that lives in your system tray or as a standalone window. Configurable durations, audio notifications when a phase ends, and local JSON-based persistence make it a simple but complete productivity tool you can build once and run on macOS, Windows, and Linux.",
+  "metrics": [
+    "~300×600px compact UI, designed to stay out of your way",
+    "Sub-second timer rendering with React state-driven intervals",
+    "Zero external database dependencies. Fully offline, JSON file-based storage",
+    "Cross-platform builds targeting macOS (DMG), Windows (NSIS), and Linux (AppImage)"
+  ],
+  "additionalTechStack": [
+    "Styled Components (dynamic, phase-aware theming)",
+    "React Router DOM (SPA client-side routing)",
+    "Zod (runtime schema validation on the Electron main process)",
+    "Menubar (system tray integration via the menubar npm package)",
+    "Vite Plugin Electron (unified dev/build pipeline for main + renderer)",
+    "Electron Builder (cross-platform packaging & distribution)"
+  ],
+  "challenges": [
+    "Bridging the Electron main/renderer process gap with a custom IPC pub/sub layer: built an event-driven service (Ipc class) with typed channels, subscriber registration, and a preload script that safely exposes ipcRenderer via contextBridge, keeping the renderer sandboxed while still reactive to backend state changes.",
+    "Implementing phase-aware dynamic theming without prop-drilling: each timer phase (Work, Short Break, Long Break, Settings) carries its own color palette, and Styled Components' ThemeProvider swaps styles at the component level based on the current phase without requiring a full re-mount.",
+    "Designing a zero-dependency local persistence layer: the Database class reads/writes JSON files on disk with automatic directory creation and ID generation, keeping the app entirely offline and self-contained while still supporting CRUD operations for config and pomodoro tasks.",
+    "Validating IPC payloads on the backend with Zod schemas before writing to disk, preventing malformed data from corrupting the local JSON store. This is a pattern more common in server APIs, applied here to a desktop context."
+  ],
+  "features": [
+    "Pomodoro timer with automatic phase cycling: work → short break → long break, driven by a configurable session counter",
+    "Audio notification on phase completion to alert you when it's time to switch",
+    "Fully customizable durations for work, short break, and long break phases via slider controls in the settings page",
+    "Configurable long-break threshold: choose how many work sessions before a long break kicks in",
+    "System tray / menubar mode (via menubar package) for a minimal, always-accessible experience",
+    "Phase-aware color theming: the entire UI shifts palette depending on whether you're focusing, resting, or on a long break",
+    "Local-first architecture with all config and pomodoro data persisted to JSON files on disk. No account or internet needed",
+    "Cross-platform desktop builds for macOS, Windows, and Linux out of the box"
+  ],
+  "architecture": {
+    "system": "Two-process Electron architecture with an event-driven IPC communication layer",
+    "details": "The main process (Node.js) owns the Database and IPC handler; it reads/writes JSON files and validates incoming payloads with Zod. The renderer process (React + Vite) runs the UI and communicates through typed IPC channels exposed via a contextBridge preload script. A custom pub/sub Ipc service on the renderer side lets React components subscribe to backend events (e.g. config responses) without coupling to Electron APIs directly. Styled Components' ThemeProvider delivers phase-aware theming, and React Router handles page navigation (Timer, Settings, Pomodoros). Vite Plugin Electron unifies the dev server and production build for both processes, and Electron Builder packages the final app for all three desktop platforms."
+  },
+  "source": "https://github.com/itsS4nty/pomodoro",
+  "live": ""
+}
